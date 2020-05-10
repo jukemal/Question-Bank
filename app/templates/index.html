@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="row justify-content-md-center">
+
+      <div class="col-lg-9">
+
+        <div class="row">
+
+            {% if questions  %}
+            
+                {% for question in questions  %}
+                
+                
+                    <div class="card w-100 mt-3">
+                      <div class="card-body">
+                        {% if question.image  %}
+                          <img class="card-img-top mb-4" src="{{ question.image.url }}" alt="Card image cap">
+                        {% endif %}
+                        <h5 class="card-title">
+                          <div class="row">
+                            <div class="col-1">
+                              {{question.id}}.
+                            </div>
+                            <div class="col-11">
+                              {{question.question|linebreaks}}
+                            </div>
+                          </div>
+                        </h5>
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item" {% if question.correct_answer == 1 %}style="background-color: #111111;"{% endif %}>1. {{question.answer_1}}</li>
+                          <li class="list-group-item" {% if question.correct_answer == 2 %}style="background-color: #111111;"{% endif %}>2. {{question.answer_2}}</li>
+                          <li class="list-group-item" {% if question.correct_answer == 3 %}style="background-color: #111111;"{% endif %}>3. {{question.answer_3}}</li>
+                          <li class="list-group-item" {% if question.correct_answer == 4 %}style="background-color: #111111;"{% endif %}>4. {{question.answer_4}}</li>
+                        </ul>
+                      </div>
+                    </div>
+
+                
+                {% endfor %}
+            
+            {% endif %}
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+{% endblock %}
